@@ -11,7 +11,7 @@ import Tables from './Components/Table'
 import { Link, Route, Routes, useParams } from 'react-router-dom';
 import Home from './Components/home';
 import ProductDetails from './Components/ProductDetails';
-import completeArr from './dummydata';
+// import completeArr from './dummydata';
 
 // import { createBrowserRouter,
 //   RouterProvider, } from 'react-router'

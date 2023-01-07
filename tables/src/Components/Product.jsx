@@ -1,15 +1,42 @@
 import { useState } from "react";
 import ProductItem from "./ProductItem";
-import completeArr from "../dummydata";
+// import completeArr from "../dummydata";
+import { getProductList } from './Api'
+// import completeArr from "../dummydata";
 
 const Product = () => {
+
+    // let completeArr = [];
+
+    const [productList, setProductList] = useState([]);
     
+    // let data = getProductList();
+    // data.then((response) => {
+    //     console.log('productlist() called ' );
+    //     completeArr = [...response.data.products];
+    // } )
+
+    // console.log('completeArr' + completeArr);
 
     const [query, setQuery ] = useState('');
     const [ sort, setSort ] = useState('default');
+    // console.log('here');
+
+    useState(() => {
+        const data = getProductList();
+        data.then((response) => {
+            // console.log('promise func');
+            setProductList([...response.data.products]);
+    })
+
+    },[])
+
+    // console.log('productLis', productList);
+
+    // console.log('now');
     
 
-    let arr = completeArr.filter((item) => {
+    let arr = productList.filter((item) => {
         return item.title.toLowerCase().indexOf(query.toLowerCase()) == -1 ? false : true;
     }) 
     // console.log(arr);
@@ -37,7 +64,7 @@ const Product = () => {
 
 
     return(
-        <div className="w-180 bg-orange-200">
+        <div className="min-w-[100%] w-180 ml-8 pl-12 bg-orange-200">
             <select className="p-3 bg-green-50 rounded-lg mr-6" value={sort}
             onChange= {handleSortChange} >
                 <option value="default">default sort</option>
@@ -51,7 +78,7 @@ const Product = () => {
             value={query}
             />
 
-            <div className="flex  gap-x-6">
+            <div className="flex flex-wrap  gap-x-6">
             {arr.map((item) => {
                 return (
                     <ProductItem {...item} />
