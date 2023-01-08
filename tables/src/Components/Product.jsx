@@ -64,7 +64,7 @@ const Product = () => {
 
 
     return(
-        <div className="min-w-[100%] w-180 ml-8 pl-12 bg-orange-200">
+        <div className="max-w-6xl bg-white mx-auto mt-12">
             <select className="p-3 bg-green-50 rounded-lg mr-6" value={sort}
             onChange= {handleSortChange} >
                 <option value="default">default sort</option>
@@ -78,7 +78,7 @@ const Product = () => {
             value={query}
             />
 
-            <div className="flex flex-wrap  gap-x-6">
+            <div className="flex flex-col  md:grid grid-cols-3  p-16 lg:px-12 gap-4 object-cover">
             {arr.map((item) => {
                 return (
                     <ProductItem {...item} />

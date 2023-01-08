@@ -1,49 +1,49 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getProduct } from './Api'
-// import completeArr from "../dummydata";
+import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
+import Loading from "./Loading";
+
 
 const ProductDetails = () => {
-    // console.log(imgURL);
-    const {sku} = useParams();
-    // console.log('sku:' +sku);
-
+    const sku = +useParams().sku;
+    
     const [ product, setProduct ] = useState({});
+    console.log(product);
 
-    useEffect(() => {
-   
+    useEffect(() => { 
+      // console.log('Running useEffect')  
       const data = getProduct(sku);
       data.then((response) => {
         setProduct(response.data);
       })
-    }, [])
-
-   
-
-    
-
-    // console.log(sku);
-
-    // let product;
-
-  // for ( let i = 0; i< completeArr.length; i++ ) {
-  //   if (completeArr[i].id == sku) {
-  //     product = completeArr[i];
-  //     break;
-  //   }
-  // }
-  // console.log(product);
-        
+    }, [sku])    
+    if(Object.keys(product).length == 0 ) {
+      return (
+        <Loading />
+      )
+    }
     return (
-        <div className="bg-teal-500 px-8 py-6 ">
-            <img className="w-28 mb-3
-            " src={product.thumbnail} alt="" />
-            <p className="font-semibold">{product.title}</p>
-            <p>Price: ${product.price}</p>
-            <p className="text-black-600">DESC: {product.description}</p>
-
-        </div>
+      <div className="grow px-8 py-6 min-w-[100%]">
+          <img className="w-28 mb-3
+          " src={product.thumbnail} alt="" />
+          <p className="font-semibold">{product.title}</p>
+          <p>Price: ${product.price}</p>
+          <p className="text-black-600">DESC: {product.description}</p>
+          <div className="flex justify-around pt-12"> 
+          <div>
+            { sku > 1 && <Link className="text-white-700 font-bold" to={'/ProductDetails/'+ (sku - 1)} > 
+            <HiArrowLeft className="text-white text-2xl"></HiArrowLeft>
+            </Link>}
+          </div>
+            
+            <Link className="text-red-700" to={'/ProductDetails/'+ (sku + 1)} >
+              <HiArrowRight className="text-white text-2xl"></HiArrowRight> </Link>
+          </div>
+      </div>
     )
 }
 
 export default ProductDetails;
+
+
