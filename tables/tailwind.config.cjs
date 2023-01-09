@@ -6,6 +6,10 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    // fontFamily: {
+    //   'sans': ['Proxima Nova', ],
+    //   display: ['Roboto']
+    // },
     extend: {},
     colors: {
       primary: {
