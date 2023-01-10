@@ -5,7 +5,7 @@ const ProductItem = ( {title, price, thumbnail, id, category} ) => {
     // console.log(id);
     return (
         <div className=" max-w-xs ">
-            <div className="w-full border-2 mt-8">
+            <div className="w-[100%] border-2 mt-8 hover:animate-grow">
             <img className="aspect-square object-cover" src={thumbnail} alt="" />
             </div>
             <h5 className="text-gray-400 text-sm  my-2 tracking-wider">{category}</h5>

@@ -11,7 +11,21 @@ module.exports = {
       display: ['Moon Dance'],
       formal: ['Montserrat']
     },
-    extend: {},
+    extend: {
+      keyframes: {
+        big: {
+          '0%': {
+            scale: '1'
+          },
+          '100%': {
+            scale: '1.03'
+          }
+        }
+      },
+      animation: {
+        'grow': 'big 0.2s 1 ease-out forwards' 
+      }
+    },
     colors: {
       primary: {
         default: 'rgb(255, 81, 81)',

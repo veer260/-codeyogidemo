@@ -5,6 +5,7 @@ import { Link, Route, Routes, useParams } from 'react-router-dom';
 import Home from './Components/home';
 import ProductDetails from './Components/ProductDetails';
 import Navbar from './Components/Navbar';
+import Cart from './Components/Cart';
 import { useState } from 'react';
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
     return output + cart[current];
   }, 0);
 
-  console.log("totalitems: ", totalItems)
+  // console.log("totalitems: ", totalItems)
 
   return(
     <div className='bg-gray-50 flex flex-col w-full h-screen overflow-y-scroll'>
@@ -33,6 +34,7 @@ function App() {
     <Routes >
        <Route path='/' element={<Home />} ></Route>
        <Route path='/ProductDetails/:sku/' element={ <ProductDetails onAddtoKart={handleAddtoKart} /> } ></Route>
+       <Route path='/cart/' element={<Cart />} ></Route>
    </Routes>
   </div>
   )  
