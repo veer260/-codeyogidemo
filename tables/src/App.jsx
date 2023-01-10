@@ -1,4 +1,4 @@
-// import { useParams } from 'react-router-dom';
+
 import './App.css'
 
 import { Link, Route, Routes, useParams } from 'react-router-dom';
@@ -7,14 +7,9 @@ import ProductDetails from './Components/ProductDetails';
 import Navbar from './Components/Navbar';
 import { useState } from 'react';
 
-
-
-
-
 function App() {
-
-  const [ cart, setCart ] = useState({});
-  // const [totalItems, setTotalItems ] = useState(0);
+  const data = JSON.parse(localStorage.getItem("cartData")) || "{}";
+  const [ cart, setCart ] = useState(data);
 
   const handleAddtoKart = (itemId, itemCount) => {
     let newItems = +(itemCount);
@@ -23,11 +18,7 @@ function App() {
     newCart[itemId] = oldItems + newItems;
     
     setCart(newCart);
-    console.log(cart);
-
-   
-    // console.log('itemCount: of ',itemId, itemCount);
-    // setTotalItems(totalItems + newItems);
+    localStorage.setItem("cartData", JSON.stringify(newCart));
   }
 
   const totalItems = Object.keys(cart).reduce((output, current) => {

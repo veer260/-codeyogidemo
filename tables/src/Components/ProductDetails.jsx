@@ -8,13 +8,13 @@ import { RiSubtractFill } from "react-icons/ri";
 
 
 const ProductDetails = ({ onAddtoKart }) => {
-    console.log('rerun')
+    // console.log('rerun')
     const sku = +useParams().sku;
     // console.log('sku:', sku)
     
     const [ product, setProduct ] = useState({});
     const [ count, setCount ] = useState(1);
-    console.log(count);
+    // console.log(count);
 
 
     useEffect(() => { 
