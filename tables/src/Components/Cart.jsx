@@ -1,6 +1,7 @@
 import React from 'react'
 import CartHeading from './CartHeading';
 import CartItem from './CartItem';
+import Coupon from './Coupon';
 
 const cartItems = [
     {
@@ -36,6 +37,7 @@ const Cart = () => {
                 )
             })
         }
+        <Coupon />
     </div>
   )
 }
