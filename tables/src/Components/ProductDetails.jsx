@@ -89,12 +89,12 @@ const ProductDetails = ({ onAddtoKart }) => {
 
           <div className="absolute bottom-12 right-0 w-[80%] flex justify-around pt-12"> 
             <div>
-              { sku > 1 && <Link className="w-12 shadow-md h-12 bg-white rounded-full flex justify-center items-center" to={'/ProductDetails/'+ (sku - 1)} > 
+              { sku > 1 && <Link className="w-12 hover:shadow-md h-12 hover:bg-white rounded-full flex justify-center items-center" to={'/ProductDetails/'+ (sku - 1)} > 
               <HiArrowLeft className="text-black text-2xl"></HiArrowLeft>
               </Link>}
             </div>
               
-              <Link className="  w-12 shadow-md h-12 bg-white rounded-full flex justify-center items-center " to={'/ProductDetails/'+ (sku + 1)} >
+              <Link className="  w-12  hover:shadow-md h-12 hover:bg-white rounded-full flex justify-center items-center " to={'/ProductDetails/'+ (sku + 1)} >
                 <HiArrowRight className="text-black text-2xl"></HiArrowRight> 
                 </Link>
         </div>
