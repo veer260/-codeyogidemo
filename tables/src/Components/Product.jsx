@@ -2,26 +2,16 @@ import { useState } from "react";
 import ProductItem from "./ProductItem";
 // import completeArr from "../dummydata";
 import { getProductList } from './Api'
-// import completeArr from "../dummydata";
+import { BiSearchAlt2 } from "react-icons/bi";
+import {  } from "react-icons/bi";
+
 
 const Product = () => {
-
-    // let completeArr = [];
-
     const [productList, setProductList] = useState([]);
-    
-    // let data = getProductList();
-    // data.then((response) => {
-    //     console.log('productlist() called ' );
-    //     completeArr = [...response.data.products];
-    // } )
-
-    // console.log('completeArr' + completeArr);
 
     const [query, setQuery ] = useState('');
     const [ sort, setSort ] = useState('default');
-    // console.log('here');
-
+    
     useState(() => {
         const data = getProductList();
         data.then((response) => {
@@ -31,16 +21,10 @@ const Product = () => {
 
     },[])
 
-    // console.log('productLis', productList);
-
-    // console.log('now');
-    
-
     let arr = productList.filter((item) => {
         return item.title.toLowerCase().indexOf(query.toLowerCase()) == -1 ? false : true;
     }) 
-    // console.log(arr);
-
+    
     if(sort === 'price') {
         arr.sort((x, y) => {
             return x.price - y.price
@@ -64,19 +48,24 @@ const Product = () => {
 
 
     return(
-        <div className="max-w-6xl bg-white mx-auto mt-12">
-            <select className="p-3 bg-green-50 rounded-lg mr-6" value={sort}
+        <div className="max-w-6xl bg-white mx-auto mt-12 pt-20">
+            <div className="flex gap-x-8">
+                <div className="  relative min-w-2xl px-12" >
+                <input className="min-w-2xl border my-0 rounded-md p-3" placeholder="Find ?"  
+                type="text" 
+                onChange={handleQueryChange}
+                value={query}
+                />
+                <BiSearchAlt2 className="absolute left-56 font-bold text-gray-400 top-[40%]"></BiSearchAlt2>
+                </div>
+
+                <select className="p-3 border text-gray-500 font-formal bg-green-50 rounded-lg mr-6" value={sort}
             onChange= {handleSortChange} >
                 <option value="default">default sort</option>
                 <option value="price">Sort by Price</option>
                 <option value="Name">Sort by Name</option>
-            </select>
-
-            <input className="bg-pink-50 my-4 rounded-md p-3 text-indigo-400" placeholder="Search" 
-            type="text" 
-            onChange={handleQueryChange}
-            value={query}
-            />
+                </select>
+            </div>
 
             <div className="flex flex-col  md:grid grid-cols-3  p-16 lg:px-12 gap-4 object-cover">
             {arr.map((item) => {

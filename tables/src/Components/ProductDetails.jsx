@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import { getProduct } from './Api'
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 import Loading from "./Loading";
+import { IoAddSharp } from 'react-icons/io5'
+import { RiSubtractFill } from "react-icons/ri";
 
 
 const ProductDetails = ({ onAddtoKart }) => {
@@ -30,6 +32,16 @@ const ProductDetails = ({ onAddtoKart }) => {
 
     }
 
+    const handleAddbtnClick = () => {
+        setCount(prev => prev + 1);
+    }
+
+    const handleSubbtnClick = () => {
+      if(count >= 2) {
+        setCount(count - 1);
+      }
+  }
+
     const handleSubmitToCart = () => {
       onAddtoKart(sku, count);
     }
@@ -45,33 +57,44 @@ const ProductDetails = ({ onAddtoKart }) => {
             " src={product.thumbnail} 
             alt="{product.title}" />
         <div className="">
-          <input className="w-12 p-2 mr-4" value={count} onChange={handleCountChange} type="number" />
+          <div className="flex items-center mt-8 mb-4">
+            <div className=" hover:bg-gray-400 h-6 w-6 rounded-full flex justify-center items-center bg-gray-300" onClick={handleAddbtnClick}>
+              <IoAddSharp></IoAddSharp>
+            </div>
+            <input className="w-8 p-2 mx-2
+            " value={count} onChange={handleCountChange} type="text" />
+            <div className="hover:bg-gray-400 h-6 w-6 rounded-full flex justify-center items-center bg-gray-300 " onClick={handleSubbtnClick}>
+              <RiSubtractFill></RiSubtractFill>
+            </div>
+          </div>
+          
+          
           <button
             onClick={handleSubmitToCart} 
-            className="px-2 py-1 text-sm bg-primary-dark font-medium text-white rounded-md">
+            className="hover:bg-primary-dark px-2 py-1 text-sm bg-primary-default font-medium uppercase font-formal text-white rounded-md">
             Add to cart
           </button>
         </div>
             
         </div> 
 
-        <div className="flex flex-col justify-center pl-12 ">
-        <p className="font-semibold">{
+        <div className="flex flex-col justify-center pl-12 font-formal ">
+        <p className="font-medium font-formal text-4xl">{
           product.title}</p>
-          <p>Price: ${product.price}</p>
-          <p className="text-black-600">Description: {product.description}</p>
-          <p>Manufactured by {product.brand}</p>
-          <p>In stock, only {product.stock} left </p>
+          <p>Price:  <span className="font-display font-bold tracking-widest"> ${product.price}</span> </p>
+          <p className="text-black font-formal mb-8">Description:  <span className="font-formal  font-normal text-base">{product.description}</span> </p>
+          <p className="font-display text-xl">Manufactured by <span className="font-formal text-base">{product.brand}</span> </p>
+          <p>In stock, only <span className="font-display font-black"> {product.stock} </span>left </p>
           <p>{product.rating}</p>
 
-          <div className="absolute bottom-0 right-0 w-[60%] flex justify-around pt-12"> 
+          <div className="absolute bottom-12 right-0 w-[80%] flex justify-around pt-12"> 
             <div>
-              { sku > 1 && <Link className="text-white-700 font-bold" to={'/ProductDetails/'+ (sku - 1)} > 
+              { sku > 1 && <Link className="w-12 shadow-md h-12 bg-white rounded-full flex justify-center items-center" to={'/ProductDetails/'+ (sku - 1)} > 
               <HiArrowLeft className="text-black text-2xl"></HiArrowLeft>
               </Link>}
             </div>
               
-              <Link className="text-red-700 mb-20" to={'/ProductDetails/'+ (sku + 1)} >
+              <Link className="  w-12 shadow-md h-12 bg-white rounded-full flex justify-center items-center " to={'/ProductDetails/'+ (sku + 1)} >
                 <HiArrowRight className="text-black text-2xl"></HiArrowRight> 
                 </Link>
         </div>

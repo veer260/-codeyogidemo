@@ -6,15 +6,16 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    // fontFamily: {
-    //   'sans': ['Proxima Nova', ],
-    //   display: ['Roboto']
-    // },
+    fontFamily: {
+      // 'sans': ['Proxima Nova', ],
+      display: ['Moon Dance'],
+      formal: ['Montserrat']
+    },
     extend: {},
     colors: {
       primary: {
         default: 'rgb(255, 81, 81)',
-        light: 'rgb(245, 148, 148)',
+        light: 'rgb(255, 148, 148)',
         dark: 'rgb(248, 47, 47)'
       },
       gray: colors.gray,

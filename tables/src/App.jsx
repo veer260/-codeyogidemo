@@ -13,14 +13,28 @@ import { useState } from 'react';
 
 function App() {
 
-  const [totalItems, setTotalItems ] = useState(0);
+  const [ cart, setCart ] = useState({});
+  // const [totalItems, setTotalItems ] = useState(0);
 
   const handleAddtoKart = (itemId, itemCount) => {
     let newItems = +(itemCount);
+    let oldItems =  cart[itemId] || 0;
+    const newCart = { ... cart};
+    newCart[itemId] = oldItems + newItems;
+    
+    setCart(newCart);
+    console.log(cart);
+
+   
     // console.log('itemCount: of ',itemId, itemCount);
-    setTotalItems(totalItems + newItems);
+    // setTotalItems(totalItems + newItems);
   }
 
+  const totalItems = Object.keys(cart).reduce((output, current) => {
+    return output + cart[current];
+  }, 0);
+
+  console.log("totalitems: ", totalItems)
 
   return(
     <div className='bg-gray-50 flex flex-col w-full h-screen overflow-y-scroll'>
@@ -29,27 +43,10 @@ function App() {
        <Route path='/' element={<Home />} ></Route>
        <Route path='/ProductDetails/:sku/' element={ <ProductDetails onAddtoKart={handleAddtoKart} /> } ></Route>
    </Routes>
-   <Navbar />
-    
   </div>
-  )
-  
-
-  
+  )  
 }
 
 export default App;
 
-// return (
-//   <div className='bg-gray-100 w-screen'>
-//     <Navbar />
-//     <div className="flex gap-y-6  ">
-   
-//     <Routes>
-//       <Route path='/' element={<Home />} ></Route>
-//       <Route path='/ProductDetails/:sku/' element={ <ProductDetails/> } ></Route>
-//     </Routes>
-    
-//   </div>
-//   </div>
-// )
+
