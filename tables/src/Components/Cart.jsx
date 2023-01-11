@@ -2,6 +2,7 @@ import React from 'react'
 import CartHeading from './CartHeading';
 import CartItem from './CartItem';
 import Coupon from './Coupon';
+import Totals from './Totals';
 
 const cartItems = [
     {
@@ -20,10 +21,15 @@ const cartItems = [
     },
 ]
 
+const total = cartItems.reduce((output, current) => {
+    return output + current.price*current.quantity
+}, 0);
+console.log('total',  total)
+
 const Cart = () => {
     console.log('cart run');
   return (
-    <div className=' bg-white m-12 pt-16'>
+    <div className=' bg-white m-12 py-20'>
         <div>
             <CartHeading />
         </div>
@@ -38,6 +44,15 @@ const Cart = () => {
             })
         }
         <Coupon />
+        <div className='flex justify-end w-[80%] mx-auto mt-8 '>
+            <div className='w-[50%] border-2 flex flex-col'>
+                <p className='font-semibold px-4 py-2 bg-gray-50 border-b-2'>Cart totals</p>
+                <Totals totalHeading="Subtotal" total={total} />
+                <Totals totalHeading="Total" total={total} />
+                <button className='uppercase bg-primary-default font-semibold text-white py-3 w-[80%] self-center my-4 rounded-md'>proceed to checkout</button>
+            </div>
+        </div>
+        
     </div>
   )
 }
